@@ -13,10 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('mainIndex')->middleware('auth');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::Post('/ajax/save-news', 'NewsUserController@saveNews')->name('saveNews');
+
+Route::get('my-news', 'NewsUserController@index')->name('myNews');
+
+Route::get('my-news/{id}/delete', 'NewsUserController@delete')->name('deleteMyNews');
